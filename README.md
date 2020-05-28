@@ -12,7 +12,7 @@ The cli is built using [commander](https://www.npmjs.com/package/commander) so y
 
 ### How it works
 
-Using Node streams to pass data through the pipeline as quickly as possible.
+I experimented with Node streams to pass data through the pipeline as quickly as possible.
 
 There are 4 stages to the pipeline, corresponding to the folder names:
 
@@ -31,3 +31,12 @@ There are 4 stages to the pipeline, corresponding to the folder names:
   - Iterate over those maps to find the top 5 in each category
 4. Store
   - Write the final stream somewhere (file passed in via the cli)
+  
+### Next steps
+
+So far I spent 1 day on the task, with more time I'd look to implement the following:
+
+- Unit / integration tests
+- Task B: Serve the results via api (with start/end date params)
+- Add e.g. a cron task to recompute the stats
+- Add an upload endpoint -> recompute stats
