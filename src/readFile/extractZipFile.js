@@ -1,3 +1,3 @@
-import zlib from 'zlib'
+import zlib from "zlib"
 
 export const extractZipFile = zlib.createGunzip()

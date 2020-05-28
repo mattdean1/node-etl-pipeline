@@ -1,7 +1,7 @@
 // TODO: keep track of max aggs as we go along
 
 import { getEventAggregator } from "./getEventAggregator.js"
-import { getUserAgentAggregator } from './getUserAgentAggregator.js' 
+import { getUserAgentAggregator } from "./getUserAgentAggregator.js"
 
 const getTopN = (n, map) => {
   const values = Object.entries(map)
@@ -18,7 +18,7 @@ export const aggregateMetrics = stream => {
   const getCity = line => line.geocode.city
   const aggregateCities = getEventAggregator(cityAgg, getCity)
 
-  const userAgentResult = {browsers: {}, os: {}}
+  const userAgentResult = { browsers: {}, os: {} }
   const aggregateUserAgent = getUserAgentAggregator(userAgentResult)
 
   const resultStream = stream
@@ -27,7 +27,7 @@ export const aggregateMetrics = stream => {
     .pipe(aggregateUserAgent)
 
   const resultsPromise = new Promise(res => {
-    resultStream.on('finish', () => {
+    resultStream.on("finish", () => {
       const topCountries = getTopN(5, countryAgg)
       const topCities = getTopN(5, cityAgg)
       const topBrowsers = getTopN(5, userAgentResult.browsers)

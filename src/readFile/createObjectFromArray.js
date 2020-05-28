@@ -1,4 +1,4 @@
-import stream from 'stream'
+import stream from "stream"
 
 export const createObjectFromArray = new stream.Transform({
   readableObjectMode: true,
@@ -8,5 +8,5 @@ export const createObjectFromArray = new stream.Transform({
     const [date, time, userId, url, ip, userAgentString] = chunk
     this.push({ rawData: { date, time, userId, url, ip, userAgentString } })
     callback()
-  }
+  },
 })

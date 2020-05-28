@@ -1,4 +1,4 @@
-import stream from 'stream'
+import stream from "stream"
 
 export const stringifyObject = new stream.Transform({
   writableObjectMode: true,
@@ -6,5 +6,5 @@ export const stringifyObject = new stream.Transform({
   transform(chunk, encoding, callback) {
     this.push(`${JSON.stringify(chunk)}\n`)
     callback()
-  }
+  },
 })

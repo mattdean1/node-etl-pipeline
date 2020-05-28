@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "generate": "node --max-old-space-size=4096 src/index.js generate -p ./data",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +16,8 @@
     "maxmind": "^4.1.1",
     "ua-parser-js": "^0.7.21"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  }
 }

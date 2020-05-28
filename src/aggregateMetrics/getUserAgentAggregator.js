@@ -1,28 +1,28 @@
-import stream from 'stream'
+import stream from "stream"
 
-export const getUserAgentAggregator = (result) => {
+export const getUserAgentAggregator = result => {
   const userMap = {}
   return new stream.Transform({
-    highWaterMark: 2147483648, // 2gb 
+    highWaterMark: 2147483648, // 2gb
     readableObjectMode: true,
     writableObjectMode: true,
 
     transform(chunk, encoding, callback) {
-        const { userId } = chunk.rawData
-        const { browser, os } = chunk.userAgent
+      const { userId } = chunk.rawData
+      const { browser, os } = chunk.userAgent
 
-        if (!userMap[userId]) {
-          if (!result.browsers[browser]) result.browsers[browser] = 0
-          result.browsers[browser]++
+      if (!userMap[userId]) {
+        if (!result.browsers[browser]) result.browsers[browser] = 0
+        result.browsers[browser]++
 
-          if (!result.os[os]) result.os[os] = 0
-          result.os[os]++
+        if (!result.os[os]) result.os[os] = 0
+        result.os[os]++
 
-          userMap[userId] = true
-        }
+        userMap[userId] = true
+      }
 
-        this.push(chunk)
-        callback()
-    }
+      this.push(chunk)
+      callback()
+    },
   })
 }

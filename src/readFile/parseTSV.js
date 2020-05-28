@@ -1,3 +1,3 @@
-import parse from 'csv-parse'
+import parse from "csv-parse"
 
-export const parseTSV = parse({delimiter: '\t'})
+export const parseTSV = parse({ delimiter: "\t" })
