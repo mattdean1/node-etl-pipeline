@@ -3,6 +3,7 @@ import stream from 'stream'
 export const getUserAgentAggregator = (result) => {
   const userMap = {}
   return new stream.Transform({
+    highWaterMark: 2147483648, // 2gb 
     readableObjectMode: true,
     writableObjectMode: true,
 

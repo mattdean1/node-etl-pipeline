@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate": "node src/index.js -p ../data",
+    "generate": "node --max-old-space-size=4096 src/index.js generate -p ./data",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
