@@ -1,11 +1,11 @@
-import { readFiles } from "./readFile/index.js"
-import { enrichData } from "./enrichData/index.js"
-import { aggregateMetrics } from "./aggregateMetrics/index.js"
-import { storeResult } from "./storeResult/index.js"
+import { readFiles } from "./read/index.js"
+import { enrichData } from "./enrich/index.js"
+import { aggregateMetrics } from "./aggregate/index.js"
+import { storeResult } from "./store/index.js"
 
 export const generateStats = async inputDirectory => {
-  const stream = readFiles(inputDirectory)
-  const enrichedStream = enrichData(stream)
+  const objectStream = readFiles(inputDirectory)
+  const enrichedStream = enrichData(objectStream)
 
   const [aggregatedStream, metricsPromise] = aggregateMetrics(enrichedStream)
 
