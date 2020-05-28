@@ -1,0 +1,1 @@
+- install node 14 using nvm
