@@ -17,12 +17,14 @@ program
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 const main = async () => {
+  // 🤮
   let x = true
   program.parseAsync(process.argv).then(() => {
     x = false
   })
+  process.stdout.write("Processing")
   while (x) {
-    console.log("working")
+    process.stdout.write('.')
     await sleep(2000)
   }
 }

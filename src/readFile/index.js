@@ -9,7 +9,7 @@ export const readFiles = directoryPath => {
   const allFiles = fs.readdirSync(directoryPath, { withFileTypes: true })
   const dataFiles = allFiles.filter(f => f.isFile() && f.name.endsWith(".gz"))
 
-  console.log(dataFiles)
+  console.log(`Reading files: ${dataFiles.map(f => f.name)}`)
 
   const fileStreams = dataFiles.map(dirEnt =>
     fs.createReadStream(path.join(directoryPath, dirEnt.name))
@@ -17,7 +17,7 @@ export const readFiles = directoryPath => {
 
   for (let i = 0; i < fileStreams.length; i++) {
     fileStreams[i].on("end", () => {
-      console.log(`Finished reading file ${dataFiles[i].name}`)
+      console.log(`\nFinished reading file ${dataFiles[i].name}`)
       if (i < fileStreams.length - 1) {
         const end = i === fileStreams.length - 2 // pass end: true to writeStream for final stream
         fileStreams[i + 1].pipe(extractZipFile, { end })
