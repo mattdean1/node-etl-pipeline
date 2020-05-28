@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate": "node --max-old-space-size=4096 src/index.js generate -p",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "node --max-old-space-size=4096 src/cli.js generate -p",
+    "cli": "node --max-old-space-size=4096 src/cli.js",
+    "test": "jest",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "author": "",
@@ -18,6 +19,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "jest": "^26.0.1",
     "prettier": "^2.0.5"
   }
 }
