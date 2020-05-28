@@ -14,7 +14,6 @@ export const filterUniqueUsers = new stream.Transform({
         userMap[userId] = true
         this.push(chunk)
       }
-      // console.log('unique' + userId);
       
       callback()
     }
