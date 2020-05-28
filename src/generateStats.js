@@ -4,12 +4,13 @@ import { aggregateMetrics } from "./aggregate/index.js"
 import { storeResult } from "./store/index.js"
 
 export const generateStats = async inputDirectory => {
-  const objectStream = readFiles(inputDirectory)
-  const enrichedStream = enrichData(objectStream)
+  const stream = readFiles(inputDirectory)
+
+  const enrichedStream = enrichData(stream)
 
   const [aggregatedStream, metricsPromise] = aggregateMetrics(enrichedStream)
 
-  // storeResult(aggregatedStream, "./data/out")
+  storeResult(aggregatedStream, "/dev/null")
 
   const metrics = await metricsPromise
   console.log(metrics)

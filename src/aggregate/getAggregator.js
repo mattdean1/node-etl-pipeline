@@ -1,11 +1,12 @@
 import stream from "stream"
 
-export const getEventAggregator = (result, getValue) =>
-  new stream.Transform({
+export const getAggregator = (getValue) => {
+  const result = {}
+  const passThroughStream = new stream.Transform({
     readableObjectMode: true,
     writableObjectMode: true,
 
-    transform(chunk, encoding, callback) {
+    transform(chunk, encoding, callback) {  
       const value = getValue(chunk)
 
       if (!result[value]) result[value] = 0
@@ -15,3 +16,6 @@ export const getEventAggregator = (result, getValue) =>
       callback()
     },
   })
+
+  return [result, passThroughStream]
+}

@@ -1,7 +1,5 @@
-// TODO: keep track of max aggs as we go along
-
-import { getEventAggregator } from "./getEventAggregator.js"
-import { getUserAgentAggregator } from "./getUserAgentAggregator.js"
+import { getAggregator } from "./getAggregator.js"
+import { filterUniqueUsers } from "./filterUniqueUsers.js"
 
 const getTopN = (n, map) => {
   const values = Object.entries(map)
@@ -10,28 +8,24 @@ const getTopN = (n, map) => {
 }
 
 export const aggregateMetrics = stream => {
-  const countryAgg = {}
-  const getCountry = line => line.geocode.country
-  const aggregateCountries = getEventAggregator(countryAgg, getCountry)
-
-  const cityAgg = {}
-  const getCity = line => line.geocode.city
-  const aggregateCities = getEventAggregator(cityAgg, getCity)
-
-  const userAgentResult = { browsers: {}, os: {} }
-  const aggregateUserAgent = getUserAgentAggregator(userAgentResult)
+  const [countries, aggregateCountries] = getAggregator(line => line.geocode.country)
+  const [cities, aggregateCities] = getAggregator(line => line.geocode.city)
+  const [browsers, aggregateBrowsers] = getAggregator(line => line.userAgent.browser)
+  const [os, aggregateOS] = getAggregator(line => line.userAgent.os)
 
   const resultStream = stream
     .pipe(aggregateCountries)
     .pipe(aggregateCities)
-    .pipe(aggregateUserAgent)
+    .pipe(filterUniqueUsers)
+    .pipe(aggregateBrowsers)
+    .pipe(aggregateOS)
 
   const resultsPromise = new Promise(res => {
     resultStream.on("finish", () => {
-      const topCountries = getTopN(5, countryAgg)
-      const topCities = getTopN(5, cityAgg)
-      const topBrowsers = getTopN(5, userAgentResult.browsers)
-      const topOS = getTopN(5, userAgentResult.os)
+      const topCountries = getTopN(5, countries)
+      const topCities = getTopN(5, cities)
+      const topBrowsers = getTopN(5, browsers)
+      const topOS = getTopN(5, os)
       res({ topCountries, topCities, topBrowsers, topOS })
     })
   })

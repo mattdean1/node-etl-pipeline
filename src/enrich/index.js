@@ -1,6 +1,4 @@
 import { geocodeIP } from "./geocodeIP.js"
 import { parseUserAgentString } from "./parseUserAgentString.js"
 
-export const enrichData = stream => {
-  return stream.pipe(geocodeIP).pipe(parseUserAgentString)
-}
+export const enrichData = stream => stream.pipe(geocodeIP).pipe(parseUserAgentString)
