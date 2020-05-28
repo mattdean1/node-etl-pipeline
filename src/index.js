@@ -4,6 +4,7 @@ const outputDataFilePath = '../data/input_data'
 import { readFile } from './readFile/index.js'
 import { enrichData } from './enrichData/index.js'
 import { aggregateMetrics } from './aggregateMetrics/index.js'
+import { storeResult } from './storeResult/index.js'
 
 
 const main = async () => {
