@@ -16,4 +16,5 @@ export const generateStats = async (inputDirectory, outputDirectory = '/dev/null
   if (print) {
     console.log(metrics)
   }
+  return metrics
 }
