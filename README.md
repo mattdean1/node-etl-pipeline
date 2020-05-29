@@ -12,7 +12,9 @@ The cli is built using [commander](https://www.npmjs.com/package/commander) so y
 
 ### How it works
 
-I experimented with Node streams to pass data through the pipeline as quickly as possible.
+I experimented with Node streams for performance and scalability.
+
+At the moment the scalability bottleneck is the filtering of unique users - the map of userIds is held in memory. In production that could be replaced with a key/value store like redis or dynamodb.
 
 There are 4 stages to the pipeline, corresponding to the folder names:
 
@@ -39,4 +41,7 @@ So far I spent 1 day on the task, with more time I'd look to implement the follo
 - Unit / integration tests
 - Task B: Serve the results via api (with start/end date params)
 - Add e.g. a cron task to recompute the stats
-- Add an upload endpoint -> recompute stats
+- Replace in-memory user map with k/v store e.g. redis
+- Add an zipfile upload endpoint -> recompute stats
+
+
