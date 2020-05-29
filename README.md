@@ -38,7 +38,7 @@ There are 4 stages to the pipeline, corresponding to the folder names:
 
 So far I spent 1 day on the task, with more time I'd look to implement the following:
 
-- Unit / integration tests
+- More Unit / integration tests
 - Task B: Serve the results via api (with start/end date params)
 - Add e.g. a cron task to recompute the stats
 - Replace in-memory user map with k/v store e.g. redis

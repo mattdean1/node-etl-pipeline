@@ -22,4 +22,17 @@ describe('generateStats', () => {
     expect(storeResult).toBeCalledWith('aggregatedStream', 'outputDir')
     expect(result).toEqual('result')
   })
+
+  it('should use default values for output dir and print if not provided', async () => {
+    readFiles.mockReturnValue('stream')
+    enrichData.mockReturnValue('enrichedStream')
+    aggregateMetrics.mockReturnValue(['aggregatedStream', new Promise(res => res('result'))])
+
+    const result = await generateStats('inputDir')
+    expect(readFiles).toBeCalledWith('inputDir')
+    expect(enrichData).toBeCalledWith('stream')
+    expect(aggregateMetrics).toBeCalledWith('enrichedStream')
+    expect(storeResult).toBeCalledWith('aggregatedStream', '/dev/null')
+    expect(result).toEqual('result')
+  })
 })

@@ -6,7 +6,7 @@ let cityLookup
 
 const openDBs = async () => {
   if (!countryLookup || !cityLookup) {
-    ;[countryLookup, cityLookup] = await Promise.all([
+    [countryLookup, cityLookup] = await Promise.all([
       maxmind.open("./data/GeoLite2-Country.mmdb"),
       maxmind.open("./data/GeoLite2-City.mmdb"),
     ])
